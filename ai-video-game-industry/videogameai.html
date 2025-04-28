@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <title>AI in Video Game Industry</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        /* pixelated font */
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+        
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #00C9A7;
+            color: #001F3F;
+        }
+
+        p {
+            background-color: #FFF7E6; /* Light cream background */
+            padding: 10px; /* Add padding inside the background */
+            border-radius: 10px; /* Rounded corners */
+            display: inline-block; /* Ensure the background wraps tightly around the text */
+            margin-bottom: 10px; /* Add spacing between elements */
+        }
+
+        h3 {
+            font-weight: bold; /* Make the text bold */
+            font-size: 18px; /* Optional: Adjust the font size for better visibility */
+            margin-top: 20px; /* Optional: Add spacing above the headings */
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.6; }
+            50% { opacity: 1; }
+            100% { opacity: 0.6; }
+        }
+
+        hr {
+            border: none;
+            height: 4px;
+            background: linear-gradient(to right, #6C63FF, #FFC300);
+            animation: pulse 2s infinite;
+            margin: 20px 0;
+        }
+
+
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .tab {
+            font-family: 'Press Start 2P', cursive; /* Retro pixelated font */
+            font-size: 12px;
+            padding: 15px 20px;
+            margin-right: 10px;
+            cursor: pointer;
+            background-color: #000; /* Black background */
+            color: #00ff00; /* Bright green text */
+            border: 3px solid #00ff00; /* Bright green border */
+            border-radius: 5px;
+            text-align: center;
+            text-transform: uppercase;
+            box-shadow: 0 4px #007700; /* Slight shadow for a 3D effect */
+            transition: all 0.2s ease-in-out;
+        }
+
+        .tab:hover {
+            background-color: #00ff00; /* Bright green background on hover */
+            color: #000; /* Black text on hover */
+            box-shadow: 0 2px #005500; /* Adjust shadow for hover effect */
+        }
+
+        .tab.active {
+            background-color: #00ff00; /* Bright green background for active tab */
+            color: #000; /* Black text for active tab */
+            box-shadow: 0 2px #005500; /* Adjust shadow for active tab */
+        }
+
+
+        .content-section {
+            display: none;
+        }
+        .content-section.active {
+            display: block;
+        }
+        #layoffs-data div {
+            margin-bottom: 10px;
+        }
+
+        
+    </style>
+</head>
+<body>
+    <h1>Exploring the Impact of Generative AI in the Game Development Industry</h1>
+    <div style="margin: 20px 0;">
+        <img src="/images/ai_banner2_Pixabay.png" alt="Techy Banner" style="width: 100vw; height: 200px; object-fit: cover; display: block;">
+    </div>
+    <div class="tabs">
+        <div class="tab" data-year="0">Introduction</div>
+        <div class="tab" data-year="1">AI Usage</div>
+        <div class="tab" data-year="2">Opinions on AI</div>
+        <div class="tab" data-year="3">Layoffs (2022-2025)</div>
+    </div>
+
+    <div id="section-0" class="content-section">
+        <h2>Introduction to AI in the Video Game Industry</h2>
+        <p>
+            Artificial Intelligence (AI) has revolutionized the video game industry, enabling developers 
+            to create more immersive, dynamic, and personalized gaming experiences. 
+            From generating realistic environments to designing intelligent non-player characters (NPCs), 
+            AI has become an integral part of game development. <br><br>
+            This report explores the various ways AI is being utilized in the gaming industry, the opinions 
+            surrounding its adoption, and its impact on the workforce.
+        </p>
+
+        <!-- Key Statistics Section -->
+        <div style="display: flex; gap: 20px; margin-top: 20px;">
+            <!-- Card 1 -->
+            <div style="flex: 1; padding: 20px; background-color: #f9f9f9; border: 1px solid #ccc; border-radius: 10px; text-align: center;">
+                <div style="display: flex; align-items: center; justify-content: center; gap: 10px;">
+                    <i class="fas fa-lightbulb" style="font-size: 24px; color: #007bff;"></i>
+                    <h3 style="margin: 0; font-size: 24px; color: #007bff;">31%</h3>
+                </div>
+                <p style="margin: 10px 0 0; font-size: 14px;">of developers actively use Generative AI tools.</p>
+            </div>
+
+            <!-- Card 2 -->
+            <div style="flex: 1; padding: 20px; background-color: #f9f9f9; border: 1px solid #ccc; border-radius: 10px; text-align: center;">
+                <div style="display: flex; align-items: center; justify-content: center; gap: 10px;">
+                    <i class="fas fa-chart-line" style="font-size: 24px; color: #007bff;"></i>
+                    <h3 style="margin: 0; font-size: 24px; color: #007bff;">14,603</h3>
+                </div>
+                <p style="margin: 10px 0 0; font-size: 14px;">industry layoffs occurred in 2024.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="section-1" class="content-section">
+        <h2>AI Usage in the Video Game Industry</h2>
+        <p id="ai-usage-text"></p>
+        <p>
+            <a href="https://www.gamedeveloper.com/business/gdc-2024-state-of-the-game-industry-devs-discuss-layoffs-generative-ai-and-more" 
+               target="_blank" 
+               style="color: #007bff; text-decoration: none;">
+               Read the 2024 State of the Game Industry Survey
+            </a>
+        </p>
+        <!--ok this SHOULD make em side by side-->
+        <!-- Question for the pie chart -->
+        <h3 style="margin-top: 20px;">Are Generative AI tools (i.e. ChatGPT, DALL-E, GitHub Copilot, Adobe Generative Fill) being used at your company or department?</h3>
+        <div style="display: flex; align-items: center; gap: 20px; margin-bottom: 50px;">
+            <!-- Pie Chart -->
+            <div id="ai-usage-pie-chart" style="background-color: #E8F0FE; flex: 1;"></div>
+        
+            <!-- Paragraph -->
+            <div style="flex: 1; font-size: 14px; line-height: 1.6;">
+                <p>
+                    The pie chart highlights the adoption of Generative AI tools in game development. 
+                    31% of respondents actively use AI, while 18% benefit from their colleagues' usage. 
+                    15% are interested but haven't adopted AI yet, while 23% have no interest at all. 
+                    Smaller portions either fall into "Other" (4%) or remain uncertain (9%), showing a mix of 
+                    enthusiasm and skepticism.
+                </p>
+            </div>
+        </div>
+        <hr />
+
+        <!-- Question for the bar chart -->
+        <h3>Are Generative AI tools being used at your company or department? Answered: Yes, I Use Them (by Job Type)</h3>
+        <div style="display: flex; align-items: center; gap: 20px; margin-bottom: 50px;">
+            <!-- Bar Chart -->
+            <div id="ai-usage-bar-chart" style="background-color: #E8F0FE; flex: 1;"></div>
+        
+            <!-- Paragraph -->
+            <div style="flex: 1; font-size: 14px; line-height: 1.6;">
+                <p>
+                    The bar chart illustrates AI usage across different job roles in game development. 
+                    Business & finance (44%) and marketing (41%) professionals lead AI adoption, while 
+                    programmers (25%) and game designers (21%) use AI more selectively. Narrative writers 
+                    (13%) and quality assurance testers (6%) show the lowest adoption, reflecting varied 
+                    approaches to AI integration across disciplines.
+                </p>
+            </div>
+        </div>
+        <hr />
+
+        <!-- Question for the doughnut chart -->
+        <h3>What is your company’s policy regarding the use of any Generative AI tools in the workplace?</h3>
+        <div style="display: flex; align-items: center; gap: 20px; margin-bottom: 50px;">
+            <!-- Donut Chart -->
+            <div id="ai-usage-doughnut-chart" style="background-color: #E8F0FE; flex: 1;"></div>
+        
+            <!-- Paragraph -->
+            <div style="flex: 1; font-size: 14px; line-height: 1.6;">
+                <p>
+                    The donut chart focuses on company AI policies, showing that 32% of companies have no official policy, 
+                    while 30% allow AI usage on an optional basis. 12% prohibit AI entirely, and 7% allow only select AI tools. 
+                    A small portion mandates AI usage (2%), while 16% are unsure of their company’s stance, illustrating the 
+                    diverse approaches taken by studios.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div id="section-2" class="content-section">
+        <h2>Opinions on AI Usage in Game Development</h2>
+        <p id="ai-opinions-text"></p>
+        <p>Below is data sourced from the 2024 State of the Game Industry Survey, which covers more opinion-based questions asked.</p>
+        <p>
+            <a href="https://www.gamedeveloper.com/business/gdc-2024-state-of-the-game-industry-devs-discuss-layoffs-generative-ai-and-more" 
+               target="_blank" 
+               style="color: #007bff; text-decoration: none;">
+               Read the 2024 State of the Game Industry Survey
+            </a>
+        </p>
+    
+        <!-- Question for the pie chart -->
+        <h3>Overall, what kind of impact do you think Generative AI will have for the game industry?</h3>
+        <div style="display: flex; align-items: center; gap: 20px; margin-bottom: 50px;">
+            <!-- Pie Chart -->
+            <div id="ai-impact-pie-chart" style="background-color: #E8F0FE; flex: 1;"></div>
+    
+            <!-- Paragraph -->
+            <div style="flex: 1; font-size: 14px; line-height: 1.6;">
+                <p>
+                    The pie chart illustrates the perceived impact of Generative AI on the game industry. 
+                    While 21% of respondents believe it will have a positive impact, the majority (57%) 
+                    foresee a mixed impact. A smaller portion (18%) anticipates a negative impact, while 
+                    1% believes there will be no impact at all. Additionally, 3% of respondents are uncertain, 
+                    reflecting a range of opinions on the role of AI in the industry.
+                </p>
+            </div>
+        </div>
+        <hr />
+    
+        <!-- Question for the bar chart -->
+        <h3>How concerned are you about the ethics of using Generative AI in the game industry?</h3>
+        <div style="display: flex; align-items: center; gap: 20px; margin-bottom: 50px;">
+            <!-- Bar Chart -->
+            <div id="ai-ethics-bar-chart" style="background-color: #E8F0FE; flex: 1;"></div>
+    
+            <!-- Paragraph -->
+            <div style="flex: 1; font-size: 14px; line-height: 1.6;">
+                <p>
+                    The bar chart highlights concerns about the ethics of using Generative AI in the game industry. 
+                    42% of respondents are very concerned, while another 42% are somewhat concerned. 
+                    A smaller group (12%) is not at all concerned, and 4% have no opinion on the matter. 
+                    This data underscores the ethical debate surrounding AI's role in game development.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div id="section-3" class="content-section">
+        <h2>Video Game Industry Layoffs (2022-2025)</h2>
+        
+        <div style="background-color: #E8F0FE; padding: 20px; border-radius: 10px; margin-bottom: 50px;"> 
+            <div id="layoffs-data"></div>
+            <select id="year-selector" onchange="handleYearChange(this.value)">
+                <option value="2022">2022</option>
+                <option value="2023">2023</option>
+                <option value="2024">2024</option>
+                <option value="2025">2025</option>
+            </select>
+        </div>
+        <div style="background-color: #FFF7E6; padding: 20px; border-radius: 10px; margin-bottom: 50px;"> 
+            <p id="layoffs-summary">
+                Between 2022 and 2025, the gaming industry experienced significant fluctuations in layoffs, 
+                reflecting broader trends in corporate restructuring and technological shifts. 
+                Layoffs totaled 8,549 in 2022, rising steadily to 10,545 in 2023, and peaking at 
+                14,603 in 2024.
+                <br><br>
+                This surge can, in part, be attributed to the rapid adoption of AI technologies (which gained popularity around 2023-2024),
+                which have increasingly automated roles in game development, quality assurance, 
+                and customer support. For example, AI-driven tools can now generate environments, 
+                characters, and even scripts, reducing the need for large creative teams. Similarly, 
+                AI advancements in playtesting and bug detection may have lessened reliance on manual 
+                testing roles. By 2025, layoffs declined to 1,837—though this number remains incomplete 
+                as the year progresses. This downturn may suggest a stabilization as companies adjust 
+                their workforce to align with AI-enhanced workflows. These data highlight the transformative 
+                impact of AI on the gaming workforce, underscoring both its efficiency gains and its 
+                disruptive effects on employment.
+            </p>
+        </div>
+        <!-- POTENTIALLY add a line chart at the bottom that can sort by parent company (select 10 max) that shows by year-->
+    </div>
+
+    <script>
+        var aiUsageData = {
+            section1: "Below are data visualizations pertaining to the 2024 State of the Game Industry Survey, showing questions asked about AI and the responses.",
+            section2: "Opinions on AI usage in game development vary widely. Some developers embrace AI for its potential to streamline processes and enhance creativity, while others express concerns about the impact on jobs and the authenticity of game design.",
+            section3: {
+                2022: [],
+                2023: [],
+                2024: [],
+                2025: []
+            }
+        };
+
+        function drawAIUsagePieChart() {
+            const data = [
+                { label: "Yes, I use them", value: 31 },
+                { label: "I don’t, but some of my colleagues do", value: 18 },
+                { label: "No, but we’re interested", value: 15 },
+                { label: "No, we have no interest", value: 23 },
+                { label: "Other", value: 4 },
+                { label: "Don’t know", value: 9 }
+            ];
+
+            const width = 300;
+            const height = 300;
+            const radius = Math.min(width, height) / 2;
+
+            const color = d3.scaleOrdinal()
+                .domain(data.map(d => d.label))
+                .range(["#FF5733", "#33C3FF", "#F4D03F", "#82E0AA", "#AF7AC5", "#E59866"]);
+
+            const svg = d3.select("#ai-usage-pie-chart")
+                .append("svg")
+                .attr("width", width + 250)
+                .attr("height", height + 50)
+                .append("g")
+                .attr("transform", `translate(${(width / 2) + 170}, ${(height / 2) + 20})`);
+
+            const pie = d3.pie()
+                .value(d => d.value);
+
+            const arc = d3.arc()
+                .innerRadius(0)
+                .outerRadius(radius);
+
+            const arcs = svg.selectAll("arc")
+                .data(pie(data))
+                .enter()
+                .append("g")
+                .attr("class", "arc");
+            
+            const labelArc = d3.arc()
+                .innerRadius(radius * 0.8) // make labels slightly outside the chart (CHANGE IF NEEDED)
+                .outerRadius(radius * 1.2);    
+
+            // Add slices
+            arcs.append("path")
+                .attr("d", arc)
+                .attr("fill", d => color(d.data.label))
+                .on("mouseover", (event, d) => {
+                    tooltip.style("visibility", "visible")
+                        .text(`${d.data.label}: ${d.data.value}%`);
+                })
+                .on("mousemove", event => {
+                    tooltip.style("top", `${event.pageY - 10}px`)
+                        .style("left", `${event.pageX + 10}px`);
+                })
+                .on("mouseout", () => {
+                    tooltip.style("visibility", "hidden");
+                });
+
+            arcs.append("text")
+                .attr("transform", d => `translate(${labelArc.centroid(d)})`)
+                .attr("text-anchor", d => (d.endAngle + d.startAngle) / 2 > Math.PI ? "end" : "start") // Adjust alignment
+                .style("font-size", "12px")
+                .text(d => d.data.label);
+
+            // el tooltipo
+            const tooltip = d3.select("#ai-usage-pie-chart")
+                .append("div")
+                .style("position", "absolute")
+                .style("background", "#f9f9f9")
+                .style("border", "1px solid #ccc")
+                .style("padding", "5px 10px")
+                .style("border-radius", "5px")
+                .style("visibility", "hidden")
+                .style("font-size", "12px");
+        }
+
+        function drawAIUsageBarChart() {
+            const data = [
+                { label: "Business & Finance", value: 44 },
+                { label: "Community/Marketing/PR", value: 41 },
+                { label: "Production & Team Management", value: 33 },
+                { label: "Programming/Engineering", value: 25 },
+                { label: "Game Design", value: 21 },
+                { label: "Narrative/Writing", value: 13 },
+                { label: "Visual Arts", value: 16 },
+                { label: "Audio", value: 14 },
+                { label: "Quality Assurance", value: 6 }
+            ];
+
+            const width = 300;
+            const height = 300;
+            const margin = { top: 20, right: 30, bottom: 40, left: 190 };
+
+            const svg = d3.select("#ai-usage-bar-chart")
+                .append("svg")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                .attr("transform", `translate(${margin.left},${margin.top})`);
+
+            const x = d3.scaleLinear()
+                .domain([0, d3.max(data, d => d.value)])
+                .range([0, width]);
+
+            const y = d3.scaleBand()
+                .domain(data.map(d => d.label))
+                .range([0, height])
+                .padding(0.1);
+
+            // make bars different colors (originally had it random but it kept giving me the absolute UGLIEST shade of piss yellow)
+            const color = d3.scaleOrdinal()
+                .domain(data.map(d => d.label))
+                .range(["#FF5733", "#33C3FF", "#f4d03f", "#82E0AA", "#AF7AC5", "#e59866", "#5DADE2", "#F1948A", "#28B463"]);
+
+
+            // Add X axis
+            svg.append("g")
+                .attr("transform", `translate(0,${height})`)
+                .call(d3.axisBottom(x).ticks(5).tickFormat(d => `${d}%`))
+                .selectAll("text")
+                .style("font-size", "12px");
+
+            // Add Y axis
+            svg.append("g")
+                .call(d3.axisLeft(y))
+                .selectAll("text")
+                .style("font-size", "12px");
+
+            // Add bars
+            svg.selectAll(".bar")
+                .data(data)
+                .enter()
+                .append("rect")
+                .attr("class", "bar")
+                .attr("x", 0)
+                .attr("y", d => y(d.label))
+                .attr("width", d => x(d.value))
+                .attr("height", y.bandwidth())
+                .attr("fill", d => color(d.label));
+
+            // Add labels to bars
+            svg.selectAll(".label")
+                .data(data)
+                .enter()
+                .append("text")
+                .attr("x", d => x(d.value) + 5)
+                .attr("y", d => y(d.label) + y.bandwidth() / 2)
+                .attr("dy", "0.35em")
+                .style("font-size", "12px")
+                .text(d => `${d.value}%`);
+        }
+
+        function drawAIUsageDoughnutChart() {
+            const data = [
+                { label: "No policy", value: 32 },
+                { label: "They’re optional", value: 30 },
+                { label: "We’re not allowed to use any", value: 12 },
+                { label: "Select tools are allowed, others are not", value: 7 },
+                { label: "They’re mandated", value: 2 },
+                { label: "Don’t know / N/A", value: 16 }
+            ];
+
+            const width = 400;
+            const height = 400;
+            const radius = Math.min(width, height) / 2;
+
+            const color = d3.scaleOrdinal()
+                .domain(data.map(d => d.label))
+                .range(["#FF5733", "#33C3FF", "#F4D03F", "#82E0AA", "#AF7AC5", "#E59866"]);
+
+            const svg = d3.select("#ai-usage-doughnut-chart")
+                .append("svg")
+                .attr("width", width + 200)
+                .attr("height", height + 150)
+                .append("g")
+                .attr("transform", `translate(${(width / 2) + 100}, ${(height / 2) + 100})`);
+
+            const pie = d3.pie()
+                .value(d => d.value);
+
+            const arc = d3.arc()
+                .innerRadius(radius * 0.5) // Inner radius for the doughnut hole ( im listening to donut hole cover by will stetson as i make this :> )
+                .outerRadius(radius);
+
+            const arcs = svg.selectAll("arc")
+                .data(pie(data))
+                .enter()
+                .append("g")
+                .attr("class", "arc");
+
+            const labelArc = d3.arc()
+                .innerRadius(radius * 1.1) // Moves labels outward slightly
+                .outerRadius(radius * 1.1); // Adjust as needed
+
+            arcs.append("path")
+                .attr("d", arc)
+                .attr("fill", d => color(d.data.label))
+                .on("mouseover", (event, d) => {
+                    tooltip.style("visibility", "visible")
+                        .text(`${d.data.label}: ${d.data.value}%`);
+                })
+                .on("mousemove", event => {
+                    tooltip.style("top", `${event.pageY - 10}px`)
+                        .style("left", `${event.pageX + 10}px`);
+                })
+                .on("mouseout", () => {
+                    tooltip.style("visibility", "hidden");
+                });
+
+            arcs.append("text")
+                .attr("transform", d => `translate(${labelArc.centroid(d)})`)
+                .attr("text-anchor", "middle")
+                .style("font-size", "12px")
+                .text(d => `${d.data.label} (${d.data.value}%)`);
+
+            // tooltip
+            const tooltip = d3.select("#ai-usage-doughnut-chart")
+                .append("div")
+                .style("position", "absolute")
+                .style("background", "#f9f9f9")
+                .style("border", "1px solid #ccc")
+                .style("padding", "5px 10px")
+                .style("border-radius", "5px")
+                .style("visibility", "hidden")
+                .style("font-size", "12px");
+        }
+
+        function drawAIImpactPieChart() {
+            const data = [
+                { label: "Positive impact", value: 21 },
+                { label: "Mixed impact", value: 57 },
+                { label: "Negative impact", value: 18 },
+                { label: "No impact", value: 1 },
+                { label: "Don’t know", value: 3 }
+            ];
+
+            const width = 400;
+            const height = 400;
+            const radius = Math.min(width, height) / 2;
+
+            const color = d3.scaleOrdinal()
+                .domain(data.map(d => d.label))
+                .range(["#4CAF50", "#9E9E9E", "#F44336", "#36A2EB", "#FFC107"]);
+
+            const svg = d3.select("#ai-impact-pie-chart")
+                .append("svg")
+                .attr("width", width + 200)
+                .attr("height", height + 100)
+                .append("g")
+                .attr("transform", `translate(${(width / 2) + 100}, ${(height / 2) + 70})`);
+
+            const pie = d3.pie()
+                .value(d => d.value);
+
+            const arc = d3.arc()
+                .innerRadius(0)
+                .outerRadius(radius);
+
+            const labelArc = d3.arc()
+                .innerRadius(radius * 1)
+                .outerRadius(radius * 1.2);
+
+            const arcs = svg.selectAll("arc")
+                .data(pie(data))
+                .enter()
+                .append("g")
+                .attr("class", "arc");
+
+            // Add slices
+            arcs.append("path")
+                .attr("d", arc)
+                .attr("fill", d => color(d.data.label));
+
+            // Add labels
+            arcs.append("text")
+                //.attr("transform", d => `translate(${labelArc.centroid(d)})`)
+                .attr("transform", d => {
+                    const pos = labelArc.centroid(d);
+                    if (d.data.label === "Don't know/unsure") pos[1] += 10; // Move upward
+                    if (d.data.label === "No impact") pos[1] -= 10;        // Move downward
+                    return `translate(${pos})`;
+                })
+
+                .attr("text-anchor", "middle")
+                .style("font-size", "12px")
+                .text(d => `${d.data.label} (${d.data.value}%)`);
+        } // End drawAIImpactPieChart
+
+        function drawAIEthicsBarChart() {
+            const data = [
+                { label: "Very concerned", value: 42 },
+                { label: "Somewhat concerned", value: 42 },
+                { label: "Not at all concerned", value: 12 },
+                { label: "No opinion", value: 4 }
+            ];
+
+            const width = 400;
+            const height = 300;
+            const margin = { top: 20, right: 30, bottom: 40, left: 150 };
+
+            const svg = d3.select("#ai-ethics-bar-chart")
+                .append("svg")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                .attr("transform", `translate(${margin.left},${margin.top})`);
+
+            const x = d3.scaleLinear()
+                .domain([0, d3.max(data, d => d.value)])
+                .range([0, width]);
+
+            const y = d3.scaleBand()
+                .domain(data.map(d => d.label))
+                .range([0, height])
+                .padding(0.1);
+
+            const color = d3.scaleOrdinal()
+                .domain(data.map(d => d.label))
+                .range(["#FF5733", "#FFC300", "#36A2EB", "#4CAF50", "#9E9E9E"]);
+
+            // Add X axis
+            svg.append("g")
+                .attr("transform", `translate(0,${height})`)
+                .call(d3.axisBottom(x).ticks(5).tickFormat(d => `${d}%`))
+                .selectAll("text")
+                .style("font-size", "12px");
+
+            // Add Y axis
+            svg.append("g")
+                .call(d3.axisLeft(y))
+                .selectAll("text")
+                .style("font-size", "12px");
+
+            // Add bars
+            svg.selectAll(".bar")
+                .data(data)
+                .enter()
+                .append("rect")
+                .attr("class", "bar")
+                .attr("x", 0)
+                .attr("y", d => y(d.label))
+                .attr("width", d => x(d.value))
+                .attr("height", y.bandwidth())
+                .attr("fill", d => color(d.label));
+
+            // Add labels to bars
+            svg.selectAll(".label")
+                .data(data)
+                .enter()
+                .append("text")
+                .attr("x", d => x(d.value) + 5)
+                .attr("y", d => y(d.label) + y.bandwidth() / 2)
+                .attr("dy", "0.35em")
+                .style("font-size", "12px")
+                .text(d => `${d.value}%`);
+        } // End drawAIEthicsBarChart
+
+        function handleYearChange(year) {
+            updateLayoffsDisplay(year);
+            drawLayoffsBarChart(year);
+        } // End handleYearChange
+
+        function loadLayoffsData(year) {
+            const filePath = `data/${year}-layoffs.csv`;
+            fetch(filePath)
+                .then(response => response.text())
+                .then(data => {
+                    const rows = data.split('\n').slice(1); // Skip header row
+                    aiUsageData.section3[year] = rows.map(row => {
+                        const columns = row.split(',');
+                        return {
+                            company: columns[1], // Studio
+                            date: columns[2], // Date
+                            numberOfLayoffs: parseInt(columns[3]) || 0, // Headcount
+                            parent: columns[4] // Parent
+                        };
+                    });
+                    console.log(`Data for ${year}:`, aiUsageData.section3[year]); // Debugging
+                    updateLayoffsDisplay(year);
+                })
+                .catch(error => console.error('Error loading layoffs data:', error));
+        } // End loadLayoffsData
+
+        function updateLayoffsDisplay(year) {
+            const layoffsContainer = document.getElementById('layoffs-data');
+            layoffsContainer.innerHTML = '';
+        } // End updateLayoffsDisplay
+
+        // Define a global color scale for parent companies
+        const colorScale = d3.scaleOrdinal()
+            .range(d3.schemeCategory10); // Use a predefined D3 color scheme
+
+        // bar charts for layoofs by parent company
+        function drawLayoffsBarChart(year) {
+            const layoffsData = aiUsageData.section3[year];
+
+            // Aggregate data by Parent company
+            const aggregatedData = layoffsData.reduce((acc, layoff) => {
+                const parent = layoff.parent || "Unknown";
+                acc[parent] = (acc[parent] || 0) + layoff.numberOfLayoffs;
+                return acc;
+            }, {});
+
+            // Calculate total layoffs for the year
+            const totalLayoffs = Object.values(aggregatedData).reduce((sum, layoffs) => sum + layoffs, 0);
+
+            // Convert aggregated data into an array of objects
+            const data = Object.entries(aggregatedData).map(([parent, totalLayoffs]) => ({
+                parent,
+                totalLayoffs
+            }));
+
+            // Sort data alphabetically, but keep "Unknown" at the far left
+            data.sort((a, b) => {
+                if (a.parent === "Unknown") return -1;
+                if (b.parent === "Unknown") return 1;
+                return a.parent.localeCompare(b.parent);
+            });
+
+            // Set up dimensions and margins
+            const margin = { top: 20, right: 30, bottom: 150, left: 60 };
+            const width = 800 - margin.left - margin.right;
+            const height = 400 - margin.top - margin.bottom;
+
+            // Remove any existing SVG
+            d3.select("#layoffs-bar-chart").remove();
+            d3.select("#total-layoffs-text").remove();
+
+            // Add data source text above the bar chart
+            d3.select("#layoffs-data")
+                .insert("div", ":first-child") // Insert at the top of the container
+                .attr("id", "data-source-text")
+                .style("font-size", "14px")
+                .style("margin-bottom", "10px")
+                .html(`Data sourced from <a href="https://publish.obsidian.md/vg-layoffs/Archive/2025" target="_blank" style="color: #007bff; text-decoration: none;">here</a>`);
+
+            // Add total layoffs text above the bar chart
+            d3.select("#layoffs-data")
+                .insert("div", ":first-child") // Insert at the top of the container
+                .attr("id", "total-layoffs-text")
+                .style("font-size", "18px")
+                .style("font-weight", "bold")
+                .style("margin-bottom", "10px")
+                .text(`Total Layoffs in ${year}: ${totalLayoffs}`);
+
+            // Create SVG container
+            const svg = d3.select("#layoffs-data")
+                .append("svg")
+                .attr("id", "layoffs-bar-chart")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                .attr("transform", `translate(${margin.left},${margin.top})`);
+            
+            // Set up scales
+            const x = d3.scaleBand()
+                .domain(data.map(d => d.parent))
+                .range([0, width])
+                .padding(0.2);
+
+            const y = d3.scaleLinear()
+                .domain([0, d3.max(data, d => d.totalLayoffs)])
+                .nice()
+                .range([height, 0]);
+
+
+            // Add X axis
+            svg.append("g")
+                .attr("transform", `translate(0,${height})`)
+                .call(d3.axisBottom(x))
+                .selectAll("text")
+                .attr("transform", "rotate(-90)") // Rotate labels 90 degrees counterclockwise
+                .style("text-anchor", "end") // Align the text to the end
+                .attr("dx", "-0.8em") // Adjust horizontal spacing
+                .attr("dy", "-0.5em") // Adjust vertical spacing
+                .on("mouseover", (event, d) => {
+                    const parentData = data.find(item => item.parent === d);
+                    const studios = layoffsData
+                        .filter(layoff => 
+                            (layoff.parent === d && layoff.numberOfLayoffs > 0) || 
+                            (d === "Unknown" && !layoff.parent && layoff.numberOfLayoffs > 0) // Include only studios with > 0 layoffs for "Unknown"
+                        )
+                        .map(layoff => {
+                            const layoffsText = `${layoff.numberOfLayoffs} layoffs`;
+                            return `${layoff.company}: ${layoffsText}`;
+                        })
+                        .join("<br>");
+                    const layoffsText = parentData.totalLayoffs === 0 ? "Unknown" : `${parentData.totalLayoffs} layoffs`;
+                    tooltip.style("visibility", "visible")
+                        .html(`<strong>${parentData.parent}</strong><br>Total Layoffs: ${layoffsText}<br><br>Studios:<br>${studios}`);
+                })
+                .on("mousemove", event => {
+                    tooltip.style("top", `${event.pageY - 10}px`)
+                        .style("left", `${event.pageX + 10}px`);
+                })
+                .on("mouseout", () => {
+                    tooltip.style("visibility", "hidden");
+                });
+
+            // Add X-axis label
+            svg.append("text")
+                .attr("x", width / 2)
+                .attr("y", height + 140) // Position below the labels & x-axis
+                .attr("text-anchor", "middle")
+                .style("font-size", "14px")
+                .style("font-weight", "bold")
+                .text("Parent Companies");
+
+            // Add Y axis
+            svg.append("g")
+                .call(d3.axisLeft(y));
+
+            // Add Y-axis label
+            svg.append("text")
+                .attr("transform", "rotate(-90)") // Rotate the text for the Y-axis
+                .attr("x", -height / 2) // Center the label vertically
+                .attr("y", -50) // Position to the left of the Y-axis
+                .attr("text-anchor", "middle")
+                .style("font-size", "14px")
+                .style("font-weight", "bold")
+                .text("Number of Layoffs");    
+
+            // Create a tooltip
+            const tooltip = d3.select("#layoffs-data")
+                .append("div")
+                .style("position", "absolute")
+                .style("background", "#f9f9f9")
+                .style("border", "1px solid #ccc")
+                .style("padding", "5px 10px")
+                .style("border-radius", "5px")
+                .style("visibility", "hidden")
+                .style("font-size", "12px");    
+
+            // Add bars
+            svg.selectAll(".bar")
+                .data(data)
+                .enter()
+                .append("rect")
+                .attr("class", "bar")
+                .attr("x", d => x(d.parent))
+                .attr("y", d => y(d.totalLayoffs))
+                .attr("width", x.bandwidth())
+                .attr("height", d => height - y(d.totalLayoffs))
+                .attr("fill", d => colorScale(d.parent)) // Use the color scale for the fill
+                .on("mouseover", (event, d) => {
+                    const layoffsText = d.totalLayoffs === 0 ? "Unknown" : `${d.totalLayoffs} layoffs`;
+                    tooltip.style("visibility", "visible")
+                        .text(`${d.parent}: ${d.totalLayoffs} layoffs`);
+                })
+                .on("mousemove", event => {
+                    tooltip.style("top", `${event.pageY - 10}px`)
+                        .style("left", `${event.pageX + 10}px`);
+                })
+                .on("mouseout", () => {
+                    tooltip.style("visibility", "hidden");
+                });
+        } // End drawLayoffsBarChart
+
+        function setupTabs() {
+            const tabs = document.querySelectorAll('.tab');
+            const sections = document.querySelectorAll('.content-section');
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const year = tab.getAttribute('data-year');
+                    sections.forEach(section => section.classList.remove('active'));
+                    tabs.forEach(tab => tab.classList.remove('active'));
+                    document.getElementById(`section-${year}`).classList.add('active');
+                    tab.classList.add('active');
+
+                    if (year === "3") {
+                        updateLayoffsDisplay(2022); // Default to 2022 layoffs
+                        drawLayoffsBarChart(2022); // Draw bar chart for 2022
+                    }
+                });
+            });
+        } // End setupTabs
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('ai-usage-text').textContent = aiUsageData.section1;
+            document.getElementById('ai-opinions-text').textContent = aiUsageData.section2;
+
+            loadLayoffsData(2022);
+            loadLayoffsData(2023);
+            loadLayoffsData(2024);
+            loadLayoffsData(2025);
+
+            setupTabs();
+
+            // Activate the first tab by default
+            document.querySelector('.tab[data-year="0"]').classList.add('active');
+            document.getElementById('section-0').classList.add('active');
+
+            // AI Usage
+            drawAIUsagePieChart();
+            drawAIUsageBarChart();
+            drawAIUsageDoughnutChart();
+
+            // Opinions
+            drawAIImpactPieChart();
+            drawAIEthicsBarChart();
+        });
+    </script>
+</body>
+</html>
