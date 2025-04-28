@@ -26,7 +26,7 @@ Also contains pdf with survey data from the GDC 2024 State Of The Game Industry 
 1. **Clone the Repository**: 
    Clone this repository to your local machine using:
    ```
-   git clone <repository-url>
+   git clone https://github.com/Lumiphos/AI-And-Video-Games.git
    ```
 
 2. **Open the Project**: 
